@@ -1,0 +1,30 @@
+body{
+ margin: 0;
+}
+.contanier{
+    padding: 1rem;
+    margin-top: 1rem;
+    position: relative;
+}
+.btndelete{
+    margin: 1rem;
+    size: 5;
+    background-color: hotpink;
+}
+.span{
+    padding: 10px;
+    position: relative;
+}
+.draggable{
+    color:white;
+    width: 300px;
+    background-color: greenyellow;
+    height: 50px;
+    margin: 20px auto;
+    border-radius: 5px;
+    padding: 1rem;
+    cursor: move;
+}
+.draggable.dragging{
+opacity: -5;
+}
