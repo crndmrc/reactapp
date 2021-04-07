@@ -5,8 +5,8 @@ function ListItems (props) {
     const items = props.items;
     const listitems = items.map(item=>{
         return   <div className="draggable" draggable="true" key="item.key">
-        <span>{item.text}<button id="btndelete" onClick={() => {
-            props.deleteItem(item.key)}} className="btndelete">X</button><button id="changeColor" onClick={()=>{
+        <span>{item.text}<button  id="btndelete" onClick={() => {
+            props.deleteItem(item.key)}} className="btndelete">X</button><button  id="changeColor" onClick={()=>{
             document.getElementsByClassName("draggable")[0].style.background="#FF5733";
             document.getElementById("changeColor").style.visibility="hidden";
         }}>✓</button></span>

@@ -12,14 +12,42 @@ class App extends Component {
     super(props);
     this.state={
       items:[],
-      currentItem:{
-        text:'',
-        key:''
-      }
+        currentItem:{
+          text:'',
+          key:''
+        },
+        nameItems:[],
+        nameItem:{
+          name:'',
+          key:''
+        },
+        lastNameItems:[],
+        lastnameItem:{
+          lastname:'',
+          key:''
+        }
     }
+    this.handleNameInput=this.handleNameInput.bind(this);
+    this.handleLastnameInput=this.handleLastnameInput.bind(this);
     this.handleNoteInput=this.handleNoteInput.bind(this);
     this.addItem=this.addItem.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
+  }
+  handleNameInput(e){
+    this.setState({
+      nameItem:{
+        name:e.target.value,
+        key:Date.now()
+      }
+    })
+  }
+  handleLastnameInput(e){
+    this.setState({
+      lastnameItem:{
+        lastname:e.target.value,
+        key:Date.now()
+      }
+    })
   }
   handleNoteInput(e){
     this.setState({
@@ -32,6 +60,10 @@ class App extends Component {
   addItem(e){
     e.preventDefault();
     const newItem = this.state.currentItem;
+    const addNameItem = this.state.nameItem;
+    const addLastNameItem = this.state.lastnameItem;
+    console.log(addNameItem);
+    console.log(addLastNameItem);
     console.log(newItem);
     if(newItem !== ""){
       const newItems=[...this.state.items,newItem];
@@ -44,7 +76,7 @@ class App extends Component {
       })
       this.setState({
         items:newItems,
-        nameItem:{
+        noteItem:{
           text:'',
           key:''
         }
@@ -64,6 +96,7 @@ class App extends Component {
         title:"--Mesaj Bildirimi--",
         message:"Başarılı bir şekilde eklendi!!",
         type:"success",
+        position:"absolute",
         container:"bottom-left",
         insert:"bottom",
         animationIn: ["animate__animated animate__fadeIn"],
@@ -75,9 +108,6 @@ class App extends Component {
         width:800
       })
     }
-    function btnOnClickVisibiltyNone (){
-
-    }
     return (
       <div className="App">
         <form id="to-do-form" onSubmit={this.addItem}>
@@ -87,12 +117,16 @@ class App extends Component {
             id="name"
             type="text"
             placeholder="Enter Name"
+            value={this.state.nameItem.name}
+            onChange={this.handleNameInput}
             />
             <label htmlFor="lastname">Lastname</label>
             <input
             id="lastname"
             type="text"
             placeholder="Enter Lastname"
+            value={this.state.lastnameItem.lastname}
+            onChange={this.handleLastnameInput}
             />
             <hr/>
             <input 
@@ -101,11 +135,13 @@ class App extends Component {
             value={this.state.currentItem.text}
             onChange={this.handleNoteInput}
             />
-            <button onClick={handleOnClickDefault,btnOnClickVisibiltyNone} type="submit">Add List</button>  
+            <button onClick={handleOnClickDefault} type="submit">Add List</button>  
+            <div className="notification">
             <ReactNotification/>
+            </div>
         </form>
-        <hr/>
-        <ListItems items={this.state.items} deleteItem={this.deleteItem}/>
+        <hr/> 
+        <ListItems nameItems ={this.state.nameItems} items={this.state.items} deleteItem={this.deleteItem}/>
         <footer>
             Design by Ceren
         </footer>
